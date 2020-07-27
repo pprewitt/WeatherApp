@@ -38,40 +38,40 @@ function getFiveDayForecast (){
               $("#searched-city-view").append(display);
               
               
-              $("#day-1").empty();
-              
+              $("#five-day").empty();
+              var firstDay= $("<div class='five-day-container col-md-2.4 bg-info rounded px-2 mt-2 py-2 ml-4'id='day-1'>");
               var dayOneDay = $("<h6>").text(dayPlusOne);
               var dayOneTemp= $("<p>").text(" Temp: " +response.daily[0].temp.day+"°F");
               var dayOneHumid= $("<p>").text("Humid: "+response.daily[0].humidity+ "%");
-              $("#day-1").append(dayOneDay, dayOneTemp, dayOneHumid);
+              $(firstDay).append(dayOneDay, dayOneTemp, dayOneHumid);
 
-              $("#day-2").empty();
+              var secondDay= $("<div class='five-day-container col-md-2.4 bg-info rounded px-2 mt-2 py-2 ml-2'id='day-2'>");
               var dayTwoDay = $("<h6>").text(dayPlusTwo);
               var dayTwoTemp= $("<p>").text(" Temp: " +response.daily[1].temp.day+"°F");
               var dayTwoHumid= $("<p>").text("Humid: "+response.daily[1].humidity+ "%");
-              $("#day-2").append(dayTwoDay, dayTwoTemp, dayTwoHumid);
+              $(secondDay).append(dayTwoDay, dayTwoTemp, dayTwoHumid);
 
-              $("#day-3").empty();
+              var thirdDay= $("<div class='five-day-container col-md-2.4 bg-info rounded px-2 mt-2 py-2 ml-2'id='day-3'>");
               var dayThreeDay = $("<h6>").text(dayPlusThree);
               var dayThreeTemp= $("<p>").text(" Temp: " +response.daily[2].temp.day+"°F");
               var dayThreeHumid= $("<p>").text("Humid: "+response.daily[2].humidity+ "%");
-              $("#day-3").append(dayThreeDay, dayThreeTemp, dayThreeHumid);
+              $(thirdDay).append(dayThreeDay, dayThreeTemp, dayThreeHumid);
 
 
-              $("#day-4").empty();
+              var fourthDay= $("<div class='five-day-container col-md-2.4 bg-info rounded px-2 mt-2 py-2 ml-2'id='day-4'>");
               var dayFourDay = $("<h6>").text(dayPlusFour);
               var dayFourTemp= $("<p>").text(" Temp: " +response.daily[3].temp.day+"°F");
               var dayFourHumid= $("<p>").text("Humid: "+response.daily[3].humidity+ "%");
-              $("#day-4").append(dayFourDay, dayFourTemp, dayFourHumid);
+              $(fourthDay).append(dayFourDay, dayFourTemp, dayFourHumid);
               
               
-              $("#day-5").empty();
+              var fifthDay= $("<div class='five-day-container col-md-2.4 bg-info rounded px-2 mt-2 py-2 ml-2'id='day-5'>");
               var dayFiveDay = $("<h6>").text(dayPlusFive);
               var dayFiveTemp= $("<p>").text(" Temp: " +response.daily[4].temp.day+"°F");
               var dayFiveHumid= $("<p>").text("Humid: "+response.daily[4].humidity+ "%");
-              $("#day-5").append(dayFiveDay, dayFiveTemp, dayFiveHumid);
+              $(fifthDay).append(dayFiveDay, dayFiveTemp, dayFiveHumid);
               
-              // $("#five-day").append(displayDayOne, displayDayTwo, displayDayThree, displayDayFour, displayDayFive);
+              $("#five-day").append(firstDay, secondDay, thirdDay, fourthDay, fifthDay);
 
   });
 };
