@@ -5,6 +5,8 @@ var dayPlusThree = moment().add(3, 'days').format('ddd, MMM D');
 var dayPlusFour = moment().add(4, 'days').format('ddd, MMM D');
 var dayPlusFive = moment().add(5, 'days').format('ddd, MMM D');
 
+
+
 $("#inputCityName").keypress(function () {
   var _val = $("#inputCityName").val();
   var _txt = _val.charAt(0).toUpperCase() + _val.slice(1);
@@ -52,17 +54,17 @@ function getFiveDayForecast (){
               display.append(humidity);
             var wind= $("<h4>").text("Wind Speed: "+ response.current.wind_speed+ " mph");
               display.append(wind);
-            var uvi= $("<h4>U.V. index: </h4>"+"<span id=uvi>")
-            var uviVal= $("#uvi").text("8");
+            var uvi= $("<h4>U.V. index: </h4>")
+            var uviVal= $("<span id='uvi' class='d-inline-block rounded px-1 py-1'>").text(response.current.uvi);
               display.append(uvi, uviVal);
             $("#searched-city-view").append(display);
               
               //UVI color function
-              if (response.current.uvi<3){
+              if (response.current.uvi<=2){
                 $("#uvi").addClass("bg-success");
-              } else if (response.current.uvi<8){
+              } else if (response.current.uvi<=7){
                 $("#uvi").addClass("bg-warning");
-              } else {
+              } else if(response.current.uvi<=20) {
                 $("#uvi").addClass("bg-danger");
               }
               
@@ -111,31 +113,34 @@ function getFiveDayForecast (){
 getFiveDayForecast();
           })
         }
-var cities = [];
+var cities = JSON.parse(localStorage.getItem('cities')) || [];
+
 function renderButtons() {
 
-    // Deletes the movies prior to adding new movies
-    // (this is necessary otherwise you will have repeat buttons)
+    
     $("#cities-view").empty();
-    // Loops through the array of movies
     for (var i = 0; i < cities.length; i++) {
 
-      // Then dynamicaly generates buttons for each movie in the array
-      // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
-      var a = $("<br><button class= 'btn-outline-dark btn d-flex justify-content-center btn-default btn-block'>");
+      var a = $("<br><button class= 'btn-outline-primary btn d-flex justify-content-center btn-default btn-block'>");
       a.addClass("city");
       a.attr("chosenCity", cities[i]);
       a.text(cities[i]);
       $("#cities-view").prepend(a);
     }
   }
+
+
+renderButtons();
+var chosenCity = cities.pop();
+displayCityInfo(chosenCity);
+
   $("#searchCity").on("click", function(event) {
     event.preventDefault();
 
     var chosenCity = $("#inputCityName").val().trim();
    
     cities.push(chosenCity);
-
+    localStorage.setItem("cities", JSON.stringify(cities));
     renderButtons();
     displayCityInfo(chosenCity);
   });
