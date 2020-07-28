@@ -5,6 +5,7 @@ var dayPlusThree = moment().add(3, 'days').format('ddd, MMM D');
 var dayPlusFour = moment().add(4, 'days').format('ddd, MMM D');
 var dayPlusFive = moment().add(5, 'days').format('ddd, MMM D');
 
+var cities = JSON.parse(localStorage.getItem('cities')) || [];
 
 
 $("#inputCityName").keypress(function () {
@@ -113,7 +114,6 @@ function getFiveDayForecast (){
 getFiveDayForecast();
           })
         }
-var cities = JSON.parse(localStorage.getItem('cities')) || [];
 
 function renderButtons() {
 
@@ -121,7 +121,7 @@ function renderButtons() {
     $("#cities-view").empty();
     for (var i = 0; i < cities.length; i++) {
 
-      var a = $("<br><button class= 'btn-outline-primary btn d-flex justify-content-center btn-default btn-block'>");
+      var a = $("<button class= 'btn-outline-primary mb-2 mt-0 btn d-flex justify-content-center btn-default btn-block'>");
       a.addClass("city");
       a.attr("chosenCity", cities[i]);
       a.text(cities[i]);
@@ -131,10 +131,12 @@ function renderButtons() {
 
 
 renderButtons();
-var chosenCity = cities.pop();
+$(document).ready(function() {
+  var chosenCity = cities.pop();
 displayCityInfo(chosenCity);
+})
 
-  $("#searchCity").on("click", function(event) {
+$("#searchCity").on("click", function(event) {
     event.preventDefault();
 
     var chosenCity = $("#inputCityName").val().trim();
