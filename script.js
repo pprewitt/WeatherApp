@@ -5,6 +5,12 @@ var dayPlusThree = moment().add(3, 'days').format('ddd, MMM D');
 var dayPlusFour = moment().add(4, 'days').format('ddd, MMM D');
 var dayPlusFive = moment().add(5, 'days').format('ddd, MMM D');
 
+$("#inputCityName").keypress(function () {
+  var _val = $("#inputCityName").val();
+  var _txt = _val.charAt(0).toUpperCase() + _val.slice(1);
+  $("#inputCityName").val(_txt);
+})
+
 function displayCityInfo(chosenCity) {
   $("#searched-city-view").empty();
   city = chosenCity
@@ -125,7 +131,7 @@ function renderButtons() {
   }
   $("#searchCity").on("click", function(event) {
     event.preventDefault();
-    
+
     var chosenCity = $("#inputCityName").val().trim();
    
     cities.push(chosenCity);
