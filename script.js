@@ -24,59 +24,60 @@ function getFiveDayForecast (){
     method: "GET"
   }).then(function(response) {
 
-    var todayIconLink = "http://openweathermap.org/img/wn/"+ response.current.weather[0].icon +"@2x.png"
-    var dayOneIconLink = "http://openweathermap.org/img/wn/"+ response.daily[0].weather[0].icon +".png"
-    var dayTwoIconLink = "http://openweathermap.org/img/wn/"+ response.daily[1].weather[0].icon +".png"
-    var dayThreeIconLink = "http://openweathermap.org/img/wn/"+ response.daily[2].weather[0].icon +".png"
-    var dayFourIconLink = "http://openweathermap.org/img/wn/"+ response.daily[3].weather[0].icon +".png"
-    var dayFiveIconLink = "http://openweathermap.org/img/wn/"+ response.daily[4].weather[0].icon +".png"
+    var todayIconLink = "http://openweathermap.org/img/wn/"+ response.current.weather[0].icon +"@2x.png";
+    var dayOneIconLink = "http://openweathermap.org/img/wn/"+ response.daily[0].weather[0].icon +".png";
+    var dayTwoIconLink = "http://openweathermap.org/img/wn/"+ response.daily[1].weather[0].icon +".png";
+    var dayThreeIconLink = "http://openweathermap.org/img/wn/"+ response.daily[2].weather[0].icon +".png";
+    var dayFourIconLink = "http://openweathermap.org/img/wn/"+ response.daily[3].weather[0].icon +".png";
+    var dayFiveIconLink = "http://openweathermap.org/img/wn/"+ response.daily[4].weather[0].icon +".png";
 
 
 
-             console.log(response)
-             var display= $("<div class='searched-weather pl-4 py-3'>");
-             var displayCityDate = $("<h2>").text(city + ": "+ dayDate)
-             display.append(displayCityDate);
+            console.log(response)
+            var display= $("<div class='searched-weather pl-4 py-3'>");
+            var displayCityDate = $("<h2>").text(city + ": "+ dayDate);
+            display.append(displayCityDate);
              
-             var icon = $("<img class= 'float-right bg-primary rounded mr-5' src="+todayIconLink+">")
-             display.append(icon);
-              var temp = $("<h4>").text(" Temperature: " + response.current.temp +"°F")
+            var icon = $("<img class= 'float-right bg-primary rounded mr-5' src="+todayIconLink+">");
+              display.append(icon);
+            var temp = $("<h4>").text(" Temperature: " + response.current.temp +"°F");
               display.append(temp);
-              var humidity= $("<h4>").text("Humidity: "+ response.current.humidity + "%")
-               display.append(humidity);
-              var wind= $("<h4>").text("Wind Speed: "+ response.current.wind_speed+ " mph")
+            var humidity= $("<h4>").text("Humidity: "+ response.current.humidity + "%");
+              display.append(humidity);
+            var wind= $("<h4>").text("Wind Speed: "+ response.current.wind_speed+ " mph");
               display.append(wind);
-              var uvi= $("<h4 id='#uvi'>").text("U.V. index: "+ response.current.uvi)
-              display.append(uvi);
-              $("#searched-city-view").append(display);
+            var uvi= $("<h4>U.V. index: </h4>"+"<span id=uvi>")
+            var uviVal= $("#uvi").text("8");
+              display.append(uvi, uviVal);
+            $("#searched-city-view").append(display);
               
               //UVI color function
               if (response.current.uvi<3){
                 $("#uvi").addClass("bg-success");
               } else if (response.current.uvi<8){
                 $("#uvi").addClass("bg-warning");
-              } else if (response.current.uvi>7){
+              } else {
                 $("#uvi").addClass("bg-danger");
               }
               
               $("#five-day").empty();
               var firstDay= $("<div class='five-day-container col-md-2.4 bg-primary rounded px-4 mt-4 py-2 ml-3'id='day-1'>");
               var dayOneDay = $("<h6>").text(dayPlusOne);
-              var dayOneIcon = $("<img src="+dayOneIconLink+">")
+              var dayOneIcon = $("<img src="+dayOneIconLink+">");
               var dayOneTemp= $("<p>").text(" Temp: " +response.daily[0].temp.day+"°F");
               var dayOneHumid= $("<p>").text("Humid: "+response.daily[0].humidity+ "%");
               $(firstDay).append(dayOneDay, dayOneIcon, dayOneTemp, dayOneHumid);
 
               var secondDay= $("<div class='five-day-container col-md-2.4 bg-primary rounded px-4 mt-4 py-2 ml-4'id='day-2'>");
               var dayTwoDay = $("<h6>").text(dayPlusTwo);
-              var dayTwoIcon = $("<img src="+dayTwoIconLink+">")
+              var dayTwoIcon = $("<img src="+dayTwoIconLink+">");
               var dayTwoTemp= $("<p>").text(" Temp: " +response.daily[1].temp.day+"°F");
               var dayTwoHumid= $("<p>").text("Humid: "+response.daily[1].humidity+ "%");
               $(secondDay).append(dayTwoDay, dayTwoIcon, dayTwoTemp, dayTwoHumid);
 
               var thirdDay= $("<div class='five-day-container col-md-2.4 bg-primary rounded px-4 mt-4 py-2 ml-4'id='day-3'>");
               var dayThreeDay = $("<h6>").text(dayPlusThree);
-              var dayThreeIcon = $("<img src="+dayThreeIconLink+">")
+              var dayThreeIcon = $("<img src="+dayThreeIconLink+">");
               var dayThreeTemp= $("<p>").text(" Temp: " +response.daily[2].temp.day+"°F");
               var dayThreeHumid= $("<p>").text("Humid: "+response.daily[2].humidity+ "%");
               $(thirdDay).append(dayThreeDay, dayThreeIcon, dayThreeTemp, dayThreeHumid);
@@ -84,7 +85,7 @@ function getFiveDayForecast (){
 
               var fourthDay= $("<div class='five-day-container col-md-2.4 bg-primary rounded px-4 mt-4 py-2 ml-4'id='day-4'>");
               var dayFourDay = $("<h6>").text(dayPlusFour);
-              var dayFourIcon = $("<img src="+dayFourIconLink+">")
+              var dayFourIcon = $("<img src="+dayFourIconLink+">");
               var dayFourTemp= $("<p>").text(" Temp: " +response.daily[3].temp.day+"°F");
               var dayFourHumid= $("<p>").text("Humid: "+response.daily[3].humidity+ "%");
               $(fourthDay).append(dayFourDay, dayFourIcon, dayFourTemp, dayFourHumid);
@@ -92,7 +93,7 @@ function getFiveDayForecast (){
               
               var fifthDay= $("<div class='five-day-container col-md-2.4 bg-primary rounded px-4 mt-4 py-2 ml-4'id='day-5'>");
               var dayFiveDay = $("<h6>").text(dayPlusFive);
-              var dayFiveIcon = $("<img src="+dayFiveIconLink+">")
+              var dayFiveIcon = $("<img src="+dayFiveIconLink+">");
               var dayFiveTemp= $("<p>").text(" Temp: " +response.daily[4].temp.day+"°F");
               var dayFiveHumid= $("<p>").text("Humid: "+response.daily[4].humidity+ "%");
               $(fifthDay).append(dayFiveDay, dayFiveIcon, dayFiveTemp, dayFiveHumid);
@@ -115,30 +116,26 @@ function renderButtons() {
 
       // Then dynamicaly generates buttons for each movie in the array
       // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
-      var a = $("<br><button class= 'mb-2 btn-outline-dark btn d-flex justify-content-center btn-default btn-block'>");
-      // Adds a class of movie to our button
+      var a = $("<br><button class= 'btn-outline-dark btn d-flex justify-content-center btn-default btn-block'>");
       a.addClass("city");
-      // Added a data-attribute
       a.attr("chosenCity", cities[i]);
-      // Provided the initial button text
       a.text(cities[i]);
-      // Added the button to the buttons-view div
       $("#cities-view").prepend(a);
     }
   }
   $("#searchCity").on("click", function(event) {
     event.preventDefault();
-    // This line of code will grab the input from the textbox
     
     var chosenCity = $("#inputCityName").val().trim();
-
-    // The movie from the textbox is then added to our array
+   
     cities.push(chosenCity);
 
-    // Calling renderButtons which handles the processing of our movie array
     renderButtons();
     displayCityInfo(chosenCity);
   });
-
-  // Adding click event listeners to all elements with a class of ".city"
-  // $(document).on("click", ".city", displayCityInfo(chosenCity));
+  $(document).on("click", ".city", function(event) {
+    event.preventDefault();
+    var chosenCity = $(this).text();
+    displayCityInfo(chosenCity); 
+  })
+  
