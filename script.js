@@ -16,7 +16,7 @@ $("#inputCityName").keypress(function () {
 
 function displayCityInfo(chosenCity) {
   $("#searched-city-view").empty();
-  city = chosenCity
+  var city = chosenCity
   var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q="+ city +"&units=imperial&appid=e9b735c3398cfe4564ec31ab0eed5a07";
   $.ajax({
     url: queryURL,
@@ -55,8 +55,8 @@ function getFiveDayForecast (){
               display.append(humidity);
             var wind= $("<h4>").text("Wind Speed: "+ response.current.wind_speed+ " mph");
               display.append(wind);
-            var uvi= $("<h4>U.V. index: </h4>")
-            var uviVal= $("<span id='uvi' class='d-inline-block rounded px-1 py-1'>").text(response.current.uvi);
+            var uvi= $("<h4 class='d-inline-block'>U.V. index:  </h4>")
+            var uviVal= $("<span id='uvi' class=' rounded ml-1 px-1 py-1'>").text(response.current.uvi);
               display.append(uvi, uviVal);
             $("#searched-city-view").append(display);
               
@@ -121,7 +121,7 @@ function renderButtons() {
     $("#cities-view").empty();
     for (var i = 0; i < cities.length; i++) {
 
-      var a = $("<button class= 'btn-outline-primary mb-2 mt-0 btn d-flex justify-content-center btn-default btn-block'>");
+      var a = $("<button class= 'btn-outline-primary mb-1 mt-0 btn d-flex justify-content-center btn-default btn-block'>");
       a.addClass("city");
       a.attr("chosenCity", cities[i]);
       a.text(cities[i]);
@@ -138,17 +138,25 @@ displayCityInfo(chosenCity);
 
 $("#searchCity").on("click", function(event) {
     event.preventDefault();
+    
 
     var chosenCity = $("#inputCityName").val().trim();
-   
+    if (cities.indexOf(chosenCity)===-1){
     cities.push(chosenCity);
     localStorage.setItem("cities", JSON.stringify(cities));
     renderButtons();
+  }
     displayCityInfo(chosenCity);
   });
   $(document).on("click", ".city", function(event) {
     event.preventDefault();
     var chosenCity = $(this).text();
     displayCityInfo(chosenCity); 
+  })
+
+  $("#clearlist").click(function(event) {
+    event.preventDefault();
+    $("#cities-view").empty();
+    localStorage.clear(); 
   })
   

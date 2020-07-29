@@ -1,7 +1,8 @@
 #inputCityName{
     border-radius: 0.3rem 0 0 0.3rem;
+    margin-bottom: 1rem;
 }
 #searchCity{
     border-radius: 0 0.3rem 0.3rem 0;
-
+    margin-bottom: 1rem;
 }
