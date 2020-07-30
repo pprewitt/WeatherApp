@@ -12,7 +12,7 @@ The assigment was to create a weather web application, which includes:
 
 ## Discussion
 
-I indexed this poorly to start and then just kept trying to support a poor index method with my code. I changed the indexing and made my life easier. added hover effects for the save button and a little bit longer day, as my days are longer while I am taking this class. 
+I think struggling through the last project helped make this project a lot easier. I am happy with the result. The app will store your search history in buttons on the left. It loads the last city you searched, and will not duplicate buttons if you search a city more than once. The clear list button will clear localStorage as well as the button list.  
 
 
 ## Deployment
@@ -20,7 +20,7 @@ I indexed this poorly to start and then just kept trying to support a poor index
 This site is deployed within github pages (https://pprewitt.github.io/WeatherApp/)
 
 ## Screenshot
-![screenshot](screenshot.png?raw=true)
+![screenshot](WeatherAppScreenShot.PNG?raw=true)
 
 
 ## Helpful Resources
